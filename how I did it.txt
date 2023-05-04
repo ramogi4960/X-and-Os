@@ -1,0 +1,20 @@
+This project is created in two parts
+
+Part 1: The display
+This describes the part of the game that displays the current standing/progress of the game.
+X and Os is a game with 9 spots divided into three horizontal/vertical grids.
+For this reason, I have decided to display those spots as list items from another list.
+It will start with an initial arrangement as follows:
+1  2  3
+4  5  6
+7  8  9
+
+If a number is selected within the logic described in Part 2, the number is replaced by either an "X" or an "O".
+This is done until a straight line is formed.
+
+Part 2: The user input
+This is the part that takes in the user input, and does the  necessary programming to change the display described in
+Part 1 above.
+When a user types in a number, the equivalent number in the list in Part 1 is replaced by either an "X" or an "O"
+When a straight line of a similar "X" or "O" exists in the display, the winner is determined.
+There are 8 possible winning patterns that can be achieved. These can be placed in a list which will be iterated on
