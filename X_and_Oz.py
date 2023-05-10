@@ -1,68 +1,54 @@
-# Part 1: The Display
-Xs = ["X", "X", "X"]
-Os = ["O", "O", "O"]
-display_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-reverse_display_list = sorted(display_list, reverse=True)
+display_grid = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+Xs, Os, player1, player2 = ["X", "X", "X"], ["O", "O", "O"], input("Enter name for player 1: "), input(
+    "Enter name for player 2: ")
+
+
+def display():
+    for i in range(0, 9, 3):
+        print(*display_grid[i:i + 3], sep="    ")
+
+
 a = True
 
 
-def part_1():
-    for i in range(0, len(display_list), 3):
-        print(display_list[i:i + 3])
-    # the verticals
-    if display_list[0::3] or reverse_display_list[0::3] == Xs:
-        print("The Xs win it!!")
-    elif display_list[0::3] or reverse_display_list[0::3] == Os:
-        print("The os win it!!")
-    elif display_list[2::3] or reverse_display_list[2::3] == Xs:
-        print("The Xs win it!!")
-    elif display_list[2::3] or reverse_display_list[2::3] == Os:
-        print("The os win it!!")
-    elif display_list[1::3] or reverse_display_list[1::3] == Xs:
-        print("The Xs win it!!")
-    elif display_list[1::3] or reverse_display_list[1::3] == Os:
-        print("The os win it!!")
-
-    # the horizontals
-    elif display_list[0:3] or reverse_display_list[0:3] == Xs:
-        print("The Xs win it!!")
-    elif display_list[0:3] or reverse_display_list[0:3] == Os:
-        print("The os win it!!")
-    elif display_list[3:6] or reverse_display_list[3:6] == Xs:
-        print("The Xs win it!!")
-    elif display_list[3:6] or reverse_display_list[3:6] == Os:
-        print("The os win it!!")
-    elif display_list[6:9] or reverse_display_list[6:9] == Xs:
-        print("The Xs win it!!")
-    elif display_list[6:9] or reverse_display_list[6:9] == Os:
-        print("The os win it!!")
-
-    # the diagonals
-    elif display_list[2:7:2] or reverse_display_list[2:7:2] == Xs:
-        print("The Xs win it!!")
-    elif display_list[2:7:2] or reverse_display_list[2:7:2] == Os:
-        print("The os win it!!")
-    elif display_list[0::4] or reverse_display_list[0::4] == Xs:
-        print("The Xs win it!!")
-    elif display_list[0::4] or reverse_display_list[0::4] == Os:
-        print("The os win it!!")
-    else:
-        print("It's a draw!!")
-
-part_1()
-
-for i in range(9):
+for i in range(10):
+    display()
     if a:
-        selector = int(input("Enter number: "))
-        for item in display_list:
-            if item == selector:
-                item = "X"
-        a = False
-        part_1()
+        turn = input(f"Enter number, {player1}: ")
+        for item in display_grid:
+            if turn == item:
+                display_grid[int(turn) - 1] = "X"
+                a = False
     else:
-        selector = int(input("Enter number: "))
-        for item in display_list:
-            if item == selector:
-                item = "O"
-        a = True
-        part_1()
+        turn = input(f"Enter number, {player2}: ")
+        for item in display_grid:
+            if turn == item:
+                display_grid[int(turn) - 1] = "O"
+                a = True
+    if display_grid[0:3] == Xs or display_grid[3:6] == Xs or display_grid[7:10] == Xs:
+        display()
+        print(player1, "has won")
+        break
+    elif display_grid[0:3] == Os or display_grid[3:6] == Os or display_grid[7:10] == Os:
+        display()
+        print(player2, "has won")
+        break
+    elif display_grid[0::3] == Xs or display_grid[1::3] == Xs or display_grid[2::3] == Xs:
+        display()
+        print(player1, "has won")
+        break
+    elif display_grid[0::3] == Os or display_grid[1::3] == Os or display_grid[2::3] == Os:
+        display()
+        print(player2, "has won")
+        break
+    elif display_grid[0::4] == Xs or display_grid[2:7:2] == Xs:
+        display()
+        print(player1, "has won")
+        break
+    elif display_grid[0::4] == Os or display_grid[2:7:2] == Os:
+        display()
+        print(player2, "has won")
+        break
+    elif i == 9:
+        print("It's a draw!!")
+        break
